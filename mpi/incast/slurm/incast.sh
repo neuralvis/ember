@@ -11,7 +11,7 @@
 #SBATCH --error=trial.%J.err
 # maximum job time in HH:MM:SS
 #SBATCH --time=01:00:00
-#SBATCH --nodes=10
+#SBATCH --nodes=4
 # maximum memory
 #SBATCH --mem-per-cpu=512M
 # run a single task
@@ -24,7 +24,7 @@ export EXPERIMENT_NAME=$SLURM_JOB_NAME
 
 # Define allocations
 export TOTAL_NC=$SLURM_JOB_NUM_NODES
-export INCAST_NC=10
+export INCAST_NC=4
 export INCAST_PPN=64
 
 # Define directories and files
@@ -55,3 +55,5 @@ export INCAST_END=`date -uI'seconds'`
 echo "start_time,end_time,job_id,job_name,user">$EXPERIMENT_JOBFILE
 echo $INCAST_START,$INCAST_END,$EXPERIMENT_NAME,$EXPERIMENT_NAME.INCAST,$USER>>$EXPERIMENT_JOBFILE
 
+# sbatch
+# sbatch --nodefile=./nodelist.txt incast.sh

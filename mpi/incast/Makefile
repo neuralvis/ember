@@ -1,5 +1,5 @@
 
-CC=mpicc
+CC=cc
 CFLAGS=-O3 -std=c99
 LIBS=
 
