@@ -2,13 +2,13 @@
 
 ###
 # job name
-#SBATCH --job-name=ppn-16
+#SBATCH --job-name=ppn-64
 # specify its partition
 #SBATCH --partition=workq
 # job stdout file
-#SBATCH --output=ppn-16.%J.out
+#SBATCH --output=ppn-64.%J.out
 # job stderr file
-#SBATCH --error=ppn-16.%J.err
+#SBATCH --error=ppn-64.%J.err
 # maximum job time in HH:MM:SS
 #SBATCH --time=01:00:00
 #SBATCH --nodes=8
@@ -21,7 +21,7 @@ export EXPERIMENT_NAME=$SLURM_JOB_NAME
 
 # Define allocations
 export INCAST_NC=$SLURM_JOB_NUM_NODES
-export INCAST_PPN=16
+export INCAST_PPN=64
 
 # Define directories and files
 export APP_BASE_DIR=/lus/msrinivasa/develop
