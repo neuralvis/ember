@@ -2,13 +2,13 @@
 
 ###
 # job name
-#SBATCH --job-name=ppn-16
+#SBATCH --job-name=congestion
 # specify its partition
 #SBATCH --partition=workq
 # job stdout file
-#SBATCH --output=ppn-16.%J.out
+#SBATCH --output=congestion.%J.out
 # job stderr file
-#SBATCH --error=ppn-16.%J.err
+#SBATCH --error=congestion.%J.err
 # maximum job time in HH:MM:SS
 #SBATCH --time=01:00:00
 #SBATCH --nodes=8
@@ -19,9 +19,12 @@
 # Define experiment name
 export EXPERIMENT_NAME=$SLURM_JOB_NAME
 
-# Define allocations
+# Define variables
+export NUM_ITERATIONS=10000
 export INCAST_NC=$SLURM_JOB_NUM_NODES
-export INCAST_PPN=16
+export INCAST_PPN=64
+export INCAST_MSG_BYTES=81920
+
 
 # Define directories and files
 export APP_BASE_DIR=/lus/msrinivasa/develop
@@ -40,8 +43,8 @@ srun --relative=0 \
      --nodes=$INCAST_NC \
      --ntasks-per-node $INCAST_PPN \
      $APP_BASE_DIR/ember/mpi/incast/incast \
-     -iterations 1000 \
-     -msgsize 81920
+     -iterations $NUM_ITERATIONS \
+     -msgsize $INCAST_MSG_BYTES
 
 # now we know INCAST is done
 export INCAST_END=`date -uI'seconds'`
